@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Stack Management</title>
+
+<style>
+    body {
+        font-family: Arial;
+        background: #f2f2f2;
+        text-align: center;
+    }
+    .container {
+        width: 400px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px gray;
+    }
+    input {
+        padding: 10px;
+        width: 80%;
+        margin: 5px;
+    }
+    button {
+        padding: 10px;
+        margin: 5px;
+        cursor: pointer;
+    }
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+    li {
+        background: #e3e3e3;
+        margin: 5px;
+        padding: 8px;
+        border-radius: 5px;
+    }
+    .top {
+        color: green;
+        font-weight: bold;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>📚 Student Stack System</h2>
+
+    <input type="text" id="name" placeholder="Enter Student Name">
+    <br>
+
+    <button onclick="pushStudent()">Add Student (Push)</button>
+    <button onclick="popStudent()">Remove Student (Pop)</button>
+
+    <h3 class="top">Top Student: <span id="topStudent">None</span></h3>
+
+    <h3>Stack List</h3>
+    <ul id="stackList"></ul>
+</div>
+
+<script>
+    let stack = [];
+
+    function pushStudent() {
+        let name = document.getElementById("name").value;
+
+        if (name === "") {
+            alert("Enter student name");
+            return;
+        }
+
+        stack.push(name);
+        document.getElementById("name").value = "";
+        displayStack();
+    }
+
+    function popStudent() {
+        if (stack.length === 0) {
+            alert("Stack is empty");
+            return;
+        }
+
+        let removed = stack.pop();
+        alert(removed + " removed from stack");
+        displayStack();
+    }
+
+    function displayStack() {
+        let list = document.getElementById("stackList");
+        let top = document.getElementById("topStudent");
+
+        list.innerHTML = "";
+
+        if (stack.length === 0) {
+            top.innerText = "None";
+            return;
+        }
+
+        top.innerText = stack[stack.length - 1];
+
+        for (let i = stack.length - 1; i >= 0; i--) {
+            let li = document.createElement("li");
+            li.textContent = stack[i];
+            list.appendChild(li);
+        }
+    }
+</script>
+
+</body>
+</html>
